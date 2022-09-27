@@ -11,6 +11,7 @@ interface HomeProps {
 const Home = ({ products }: HomeProps) => {
   return (
     <>
+      <h1>Preview APP</h1>
       <PageTitle>商品列表 React Refresh</PageTitle>
       <ProductGallery>
         {products.map((product) => (
