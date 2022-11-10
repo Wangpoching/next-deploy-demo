@@ -103,7 +103,7 @@ const LoginPage = () => {
       <Link href={`https://www.linkedin.com/oauth/v2/authorization?${queryString.stringify(queryAUCode)}`}>
         LinkedIn 登入
       </Link>
-      <button onClick={_fbLogin} />
+      <button onClick={_fbLogin}>FB 登入<button/>
     </>
   )
 };
