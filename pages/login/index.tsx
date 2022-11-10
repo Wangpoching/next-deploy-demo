@@ -4,7 +4,7 @@ import Link from 'next/link'
 const CLIENT_ID = '86mpic7af5qo71'
 const CLIENT_SECRET = 'l1IKqVoXwd5FYGRg'
 const REDIRECT_URI = 'https://next-deploy-demo-product.vercel.app/login'
-const SCOPE = 'r_liteprofile&r_emailaddress'
+const SCOPE = 'r_liteprofile r_emailaddress'
 
 const LoginPage = () => {
   // 取得 authorization code
@@ -14,7 +14,7 @@ const LoginPage = () => {
     redirect_uri: REDIRECT_URI,
     scope: SCOPE,
   }
-  console.log(queryString.stringify(queryAUCode))
+
   return (
     <Link href={`https://www.linkedin.com/oauth/v2/authorization?${queryString.stringify(queryAUCode)}`}>
       LinkedIn 登入
