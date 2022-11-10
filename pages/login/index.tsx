@@ -78,7 +78,7 @@ const LoginPage = () => {
     <>
       <Script 
         id="fb-sdk"
-        src="https://connect.facebook.net/en_US/sdk.js"
+        src="https://connect.facebook.net/en_US/all.js"
         strategy="beforeInteractive"
       ></Script>
       <Script
@@ -90,7 +90,7 @@ const LoginPage = () => {
           cookie: true,
           xfbml: true,
           version: 'v2.9',
-        })`}
+        });`}
       </Script>
       {isSubmitting && 
         <div style={{
