@@ -37,7 +37,6 @@ const LoginPage = () => {
           scope: 'email, public_profile',
           return_scopes: true
         })
-    }
   }
 
   useEffect(() => {
