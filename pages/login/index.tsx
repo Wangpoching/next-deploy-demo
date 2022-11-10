@@ -32,6 +32,7 @@ const LoginPage = () => {
 
   const _fbLogin = () => {
     // Get FB Login Status
+    console.log('Fuck q')
     FB.getLoginStatus((response) => {
       if (response.status !== 'connected') {
         return FB.login(function (response) {
