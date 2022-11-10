@@ -32,6 +32,12 @@ const LoginPage = () => {
 
   const _fbLogin = () => {
     // Get FB Login Status
+    FB.init({
+      appId: '1104431630215983',
+      cookie: true,
+      xfbml: false,
+      version: 'v2.9',
+    })
     FB.getLoginStatus((response) => {
       if (response.status !== 'connected') {
         console.log('Fuck q')
@@ -81,18 +87,6 @@ const LoginPage = () => {
         src="https://connect.facebook.net/en_US/all.js"
         strategy="beforeInteractive"
       ></Script>
-      <Script
-        id="fb-init"
-        strategy="beforeInteractive"
-      >
-        {`FB.init({
-          appId: '1104431630215983',
-          cookie: true,
-          xfbml: false,
-          version: 'v2.9',
-        });
-        console.log('fuck')`}
-      </Script>
       {isSubmitting && 
         <div style={{
           position: 'fixed',
