@@ -89,7 +89,7 @@ const LoginPage = () => {
           appId: '1104431630215983',
           cookie: true,
           xfbml: true,
-          version: 'v15.0',
+          version: 'v2.9',
         });`}
       </Script>
       {isSubmitting && 
