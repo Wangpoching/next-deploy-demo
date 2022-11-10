@@ -90,7 +90,8 @@ const LoginPage = () => {
           cookie: true,
           xfbml: true,
           version: 'v2.9',
-        });`}
+        });
+        console.log('fuck')`}
       </Script>
       {isSubmitting && 
         <div style={{
