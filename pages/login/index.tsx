@@ -37,7 +37,7 @@ const LoginPage = () => {
         return FB.login(function (response) {
           console.log('res', response)
         }, {
-          scope: 'email, public_profile',
+          scope: 'email',
           return_scopes: true
         })
       }
