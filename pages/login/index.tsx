@@ -30,6 +30,16 @@ const LoginPage = () => {
     scope: SCOPE,
   }
 
+  const _fbLogin = () => {
+    FB.login(function (response) {
+          console.log('res', response)
+        }, {
+          scope: 'email, public_profile',
+          return_scopes: true
+        })
+    }
+  }
+
   useEffect(() => {
     // Get FB Login Status
     FB.getLoginStatus((response) => {
@@ -94,6 +104,7 @@ const LoginPage = () => {
       <Link href={`https://www.linkedin.com/oauth/v2/authorization?${queryString.stringify(queryAUCode)}`}>
         LinkedIn 登入
       </Link>
+      <button onClick={_fbLogin} />
     </>
   )
 };
