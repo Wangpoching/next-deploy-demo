@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const CLIENT_ID = '86mpic7af5qo71'
 const CLIENT_SECRET = 'l1IKqVoXwd5FYGRg'
-const REDIRECT_URI = 'next-deploy-demo-product.vercel.app/login'
+const REDIRECT_URI = 'https://next-deploy-demo-product.vercel.app/login'
 const SCOPE = 'r_liteprofile%20r_emailaddress'
 
 const LoginPage = () => {
