@@ -31,20 +31,18 @@ const LoginPage = () => {
   }
 
   const _fbLogin = () => {
-    FB.login(function (response) {
-      console.log('res', response)
-    }, {
-      scope: 'email, public_profile',
-      return_scopes: true
-    })
-  }
-
-  useEffect(() => {
     // Get FB Login Status
     FB.getLoginStatus((response) => {
-      console.log('res', response); // 這裡可以得到 fb 回傳的結果
+      if (response.status !== 'connected') {
+        return FB.login(function (response) {
+          console.log('res', response)
+        }, {
+          scope: 'email, public_profile',
+          return_scopes: true
+        })
+      }
     }, true);
-  }, [])
+  }
 
   useEffect(() => {
     if (router.query?.code) {
