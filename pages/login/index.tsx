@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import queryString from 'query-string'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Script from 'next/script'
 
 const CLIENT_ID = '86mpic7af5qo71'
 const CLIENT_SECRET = 'l1IKqVoXwd5FYGRg'
@@ -28,6 +29,13 @@ const LoginPage = () => {
     redirect_uri: REDIRECT_URI,
     scope: SCOPE,
   }
+
+  useEffect(() => {
+    // Get FB Login Status
+    FB.getLoginStatus((response) => {
+      console.log('res', response); // 這裡可以得到 fb 回傳的結果
+    }, true);
+  }, [])
 
   useEffect(() => {
     if (router.query?.code) {
@@ -60,6 +68,22 @@ const LoginPage = () => {
 
   return (
     <>
+      <Script 
+        id="fb-sdk"
+        src="https://connect.facebook.net/en_US/sdk.js"
+        strategy="beforeInteractive"
+      ></Script>
+      <Script
+        id="fb-init"
+        strategy="beforeInteractive"
+      >
+        {`FB.init({
+          appId: '1104431630215983',
+          cookie: true,
+          xfbml: true,
+          version: 'v15.0',
+        });`}
+      </Script>
       {isSubmitting && 
         <div style={{
           position: 'fixed',

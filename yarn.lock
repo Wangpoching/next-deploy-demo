@@ -297,6 +297,11 @@
   "resolved" "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.0.6.tgz"
   "version" "1.0.6"
 
+"@types/facebook-js-sdk@^3.3.6":
+  "integrity" "sha512-CxTLMVtZsgrj9Ven5Pn1vcFumCFs+CG8Jfc63xWq/8b9e6uWjGyZlMnvQk7lIVn97Zd1vpu0ZK/OFWAoap0RCw=="
+  "resolved" "https://registry.npmjs.org/@types/facebook-js-sdk/-/facebook-js-sdk-3.3.6.tgz"
+  "version" "3.3.6"
+
 "@types/hoist-non-react-statics@*":
   "integrity" "sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA=="
   "resolved" "https://registry.npmjs.org/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz"

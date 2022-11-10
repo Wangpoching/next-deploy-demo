@@ -10,6 +10,7 @@
     "analyze": "cross-env ANALYZE=true yarn build"
   },
   "dependencies": {
+    "@types/facebook-js-sdk": "^3.3.6",
     "cross-env": "^7.0.3",
     "next": "11.0.1",
     "query-string": "^7.1.1",
