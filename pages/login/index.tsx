@@ -17,7 +17,7 @@ const LoginPage = () => {
     fetch(`https://www.linkedin.com/oauth/v2/authorization?${queryString.stringify(queryAUCode)}`)
   }
   return (
-    <button onCkick={_LinkedInSignIn}>LinkedIn 登入</button>
+    <button onClick={_LinkedInSignIn}>LinkedIn 登入</button>
   );
 };
 
