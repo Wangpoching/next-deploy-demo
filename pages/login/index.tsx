@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from 'next'
 import { useEffect, useState } from 'react'
 import queryString from 'query-string'
 import Link from 'next/link'
-import { GoogleLogin } from 'react-google-login'
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
 
@@ -25,9 +25,8 @@ interface getAccessTokenInfo {
 
 const LoginPage = () => {
   const router = useRouter()
-  const [ isSubmitting, setIsSubmitting ] = useState(false)
 
-  // 取得 authorization code
+  // 這是 LinkedIn 要取得 authorization token 要帶的 queryString
   const queryAUCode = {
     response_type: 'code',
     client_id: CLIENT_ID,
@@ -39,30 +38,23 @@ const LoginPage = () => {
   const _fbLogin = () => {
     // Get FB Login Status
     FB.getLoginStatus((response) => {
+      // 如果沒登入就要 CALL 登入
       if (response.status !== 'connected') {
         return FB.login(function (response) {
+           // 登入好了送 ACCESS_TOKEN 到後台
           console.log('fb login success')
-          router.push('/products')
         }, {
           scope: 'email',
           return_scopes: true
         })
       } else {
-        router.push('/products')
+         // 如果登入了就要送 ACCESS_TOKEN 到後台
       }
     }, true);
   }
 
-  const _onGoogleSuccess = (res: any) => {
-    console.log('google login success')
-    router.push('/products')
-  }
-
-  const _onGoogleFailed = (res: any) => {
-    alert(JSON.stringify(res))
-  }
-
   useEffect(() => {
+    // 一開始就把 FB 初始化
     FB.init({
       appId: '1104431630215983',
       cookie: true,
@@ -72,9 +64,12 @@ const LoginPage = () => {
     })
   }, [])
 
+  {/* LinkedIn 登入: 當網址有帶 code 的時候代表 linkedin 回傳 authorization code，
+    此時要將 authorization code 用 POST 拿到 access_token，
+    可是會被 CORS 擋住，可能要用 FORM 寫(?
+  */}
   useEffect(() => {
     if (router.query?.code) {
-      setIsSubmitting(true)
       const queryAccessToken: getAccessTokenInfo = {
         grant_type: 'authorization_code',
         code: router.query.code as string,
@@ -96,38 +91,38 @@ const LoginPage = () => {
         },
         method: 'POST',
       }).then(() => {
-        setIsSubmitting(false)
+        // 把 ACCESS_TOKEN 打給後台
       })
     }
   }, [router.query.code])
 
   return (
-    <>
+    <GoogleOAuthProvider
+      clientId={CLIENT_ID_GOOGLE}
+    >
+      {/* 引入 FB 模組 => 要等模組載完才能做其他事 */}
       <Script 
         id="fb-sdk"
         src="https://connect.facebook.net/en_US/all.js"
         strategy="beforeInteractive"
       ></Script>
-      {isSubmitting && 
-        <div style={{
-          position: 'fixed',
-          width: '100vw',
-          height: '100vh',
-          backgroundColor: '#eee'
-        }}/>}
+      {/* LinkedIn 登入點擊導轉到登入畫面 */}
       <Link href={`https://www.linkedin.com/oauth/v2/authorization?${queryString.stringify(queryAUCode)}`}>
         LinkedIn 登入
       </Link>
+      {/* FB 登入點擊導轉到登入畫面 */}
       <button onClick={_fbLogin}>FB 登入</button>
+      {/* Google 登入點擊導轉到登入畫面 */}
       <GoogleLogin
-        clientId={CLIENT_ID_GOOGLE}
-        buttonText='Login'
-        onSuccess={_onGoogleSuccess}
-        onFailure={_onGoogleFailed}
-        cookiePolicy={'single_host_origin'}
-        isSignedIn={false}
+        onSuccess={credentialResponse => {
+          console.log(credentialResponse);
+          router.push('/products')
+        }}
+        onError={() => {
+          console.log('Login Failed');
+        }}
       />
-    </>
+    </GoogleOAuthProvider>
   )
 };
 
