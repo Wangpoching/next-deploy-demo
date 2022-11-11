@@ -59,7 +59,7 @@ const LoginPage = () => {
   }
 
   const _onGoogleFailed = (res: any) => {
-    alert('gogole 登入失敗')
+    alert(JSON.stringify(res))
   }
 
   useEffect(() => {
