@@ -32,12 +32,6 @@ const LoginPage = () => {
 
   const _fbLogin = () => {
     // Get FB Login Status
-    FB.init({
-      appId: '1104431630215983',
-      cookie: true,
-      xfbml: false,
-      version: 'v2.9',
-    })
     FB.getLoginStatus((response) => {
       if (response.status !== 'connected') {
         console.log('Fuck q')
@@ -50,6 +44,15 @@ const LoginPage = () => {
       }
     }, true);
   }
+
+  useEffect(() => {
+    FB.init({
+      appId: '1104431630215983',
+      cookie: true,
+      xfbml: false,
+      version: 'v2.9',
+    })
+  }, [])
 
   useEffect(() => {
     if (router.query?.code) {
