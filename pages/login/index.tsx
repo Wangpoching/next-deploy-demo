@@ -9,7 +9,7 @@ import Script from 'next/script'
 // LinkedIn
 const CLIENT_ID = '86mpic7af5qo71'
 const CLIENT_SECRET = 'l1IKqVoXwd5FYGRg'
-const REDIRECT_URI = 'https://next-deploy-demo-product.vercel.app/login'
+const REDIRECT_URI = 'https://bocyun.tw/login'
 const SCOPE = 'r_liteprofile r_emailaddress'
 
 // Google
@@ -50,7 +50,7 @@ const LoginPage = () => {
       } else {
         router.push('/products')
       }
-    }, false);
+    }, true);
   }
 
   const _onGoogleSuccess = (res: any) => {
@@ -67,7 +67,7 @@ const LoginPage = () => {
       appId: '1104431630215983',
       cookie: true,
       xfbml: true,
-      status: true, // 快取登入狀態
+      status: false, // 快取登入狀態
       version: 'v3.2',
     })
   }, [])
