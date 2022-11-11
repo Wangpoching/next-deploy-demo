@@ -50,8 +50,8 @@ const LoginPage = () => {
     FB.init({
       appId: '1104431630215983',
       cookie: true,
-      xfbml: false,
-      version: 'v2.9',
+      xfbml: true,
+      version: 'v3.2',
     })
   }, [])
 
