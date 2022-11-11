@@ -2,13 +2,18 @@ import { GetServerSidePropsContext } from 'next'
 import { useEffect, useState } from 'react'
 import queryString from 'query-string'
 import Link from 'next/link'
+import { GoogleLogin } from 'react-google-login'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
 
+// LinkedIn
 const CLIENT_ID = '86mpic7af5qo71'
 const CLIENT_SECRET = 'l1IKqVoXwd5FYGRg'
 const REDIRECT_URI = 'https://next-deploy-demo-product.vercel.app/login'
 const SCOPE = 'r_liteprofile r_emailaddress'
+
+// Google
+const CLIENT_ID_GOOGLE = '641252515386-7m3ibpas1ic11rbqj7hah6simts9duov.apps.googleusercontent.com'
 
 interface getAccessTokenInfo {
   grant_type: string;
@@ -30,20 +35,31 @@ const LoginPage = () => {
     scope: SCOPE,
   }
 
+  // false 代表有串好有快取就不重發 api 檢查登入狀態
   const _fbLogin = () => {
     // Get FB Login Status
     FB.getLoginStatus((response) => {
-      console.log(JSON.stringify(response))
       if (response.status !== 'connected') {
         return FB.login(function (response) {
-          console.log('login')
-          console.log(JSON.stringify(response))
+          console.log('fb login success')
+          router.push('/products')
         }, {
           scope: 'email',
           return_scopes: true
         })
+      } else {
+        router.push('/products')
       }
     }, false);
+  }
+
+  const _onGoogleSuccess = (res: any) => {
+    console.log('google login success')
+    router.push('/products')
+  }
+
+  const _onGoogleFailed = (res: any) => {
+    alert('gogole 登入失敗')
   }
 
   useEffect(() => {
@@ -103,6 +119,14 @@ const LoginPage = () => {
         LinkedIn 登入
       </Link>
       <button onClick={_fbLogin}>FB 登入</button>
+      <GoogleLogin
+        clientId={CLIENT_ID_GOOGLE}
+        buttonText='Login'
+        onSuccess={_onGoogleSuccess}
+        onFailure={_onGoogleFailed}
+        cookiePolicy={'single_host_origin'}
+        isSignedIn={false}
+      />
     </>
   )
 };
