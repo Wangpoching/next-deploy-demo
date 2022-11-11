@@ -44,7 +44,7 @@ const LoginPage = () => {
         })
       }
       return router.push('/products')
-    }, true);
+    }, false);
   }
 
   useEffect(() => {
@@ -52,6 +52,7 @@ const LoginPage = () => {
       appId: '1104431630215983',
       cookie: true,
       xfbml: true,
+      status: true, // 快取登入狀態
       version: 'v3.2',
     })
   }, [])
