@@ -43,7 +43,7 @@ const LoginPage = () => {
           return_scopes: true
         })
       }
-      return
+      return router.push('/products')
     }, true);
   }
 
