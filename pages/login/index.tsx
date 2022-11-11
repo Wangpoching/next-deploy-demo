@@ -42,7 +42,7 @@ const LoginPage = () => {
           return_scopes: true
         })
       }
-    }, true);
+    });
   }
 
   useEffect(() => {
