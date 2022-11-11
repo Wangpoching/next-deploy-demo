@@ -33,9 +33,10 @@ const LoginPage = () => {
   const _fbLogin = () => {
     // Get FB Login Status
     FB.getLoginStatus((response) => {
+      console.log(JSON.stringify(response))
       if (response.status !== 'connected') {
         return FB.login(function (response) {
-          console.log('res', response)
+          console.log('login')
         }, {
           scope: 'email',
           return_scopes: true
