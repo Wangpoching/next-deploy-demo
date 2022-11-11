@@ -34,7 +34,6 @@ const LoginPage = () => {
     // Get FB Login Status
     FB.getLoginStatus((response) => {
       if (response.status !== 'connected') {
-        console.log('Fuck q')
         return FB.login(function (response) {
           console.log('res', response)
         }, {
@@ -42,6 +41,7 @@ const LoginPage = () => {
           return_scopes: true
         })
       }
+      return
     }, true);
   }
 
