@@ -37,6 +37,7 @@ const LoginPage = () => {
       if (response.status !== 'connected') {
         return FB.login(function (response) {
           console.log('login')
+          console.log(JSON.stringify(response))
         }, {
           scope: 'email',
           return_scopes: true
