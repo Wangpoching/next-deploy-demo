@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from 'next'
 import { useEffect, useState } from 'react'
 import queryString from 'query-string'
 import Link from 'next/link'
-import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google'
+import { useGoogleLogin } from '@react-oauth/google'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
 
@@ -11,9 +11,6 @@ const CLIENT_ID = '86mpic7af5qo71'
 const CLIENT_SECRET = 'l1IKqVoXwd5FYGRg'
 const REDIRECT_URI = 'https://bocyun.tw/login'
 const SCOPE = 'r_liteprofile r_emailaddress'
-
-// Google
-const CLIENT_ID_GOOGLE = '641252515386-7m3ibpas1ic11rbqj7hah6simts9duov.apps.googleusercontent.com'
 
 interface getAccessTokenInfo {
   grant_type: string;
@@ -102,9 +99,7 @@ const LoginPage = () => {
   }, [router.query.code])
 
   return (
-    <GoogleOAuthProvider
-      clientId={CLIENT_ID_GOOGLE}
-    >
+    <>
       {/* 引入 FB 模組 => 要等模組載完才能做其他事 */}
       <Script 
         id="fb-sdk"
@@ -121,7 +116,7 @@ const LoginPage = () => {
       <button onClick={() => googleLogin()}>
         Sign in with Google 🚀{' '}
       </button>;
-    </GoogleOAuthProvider>
+    </>
   )
 };
 
