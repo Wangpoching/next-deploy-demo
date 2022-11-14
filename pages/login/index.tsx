@@ -10,7 +10,7 @@ import Script from 'next/script'
 const CLIENT_ID = '86mpic7af5qo71'
 const CLIENT_SECRET = 'l1IKqVoXwd5FYGRg'
 const REDIRECT_URI = 'https://bocyun.tw/login'
-const SCOPE = 'r_liteprofile r_emailaddress'
+const SCOPE = 'r_emailaddress r_liteprofile'
 
 interface getAccessTokenInfo {
   grant_type: string;
