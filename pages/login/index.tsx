@@ -114,6 +114,7 @@ const LoginPage = () => {
       <button onClick={_fbLogin}>FB 登入</button>
       {/* Google 登入點擊導轉到登入畫面 */}
       <GoogleLogin
+        flow="auth-code"
         onSuccess={credentialResponse => {
           console.log(JSON.stringify(credentialResponse));
           router.push('/products')
