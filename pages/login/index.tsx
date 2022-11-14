@@ -52,7 +52,6 @@ const LoginPage = () => {
 
   const googleLogin = useGoogleLogin({
     onSuccess: codeResponse => console.log(codeResponse),
-    flow: 'auth-code',
   });
 
   useEffect(() => {
@@ -115,7 +114,7 @@ const LoginPage = () => {
       {/* Google 登入點擊導轉到登入畫面 */}
       <button onClick={() => googleLogin()}>
         Sign in with Google 🚀{' '}
-      </button>;
+      </button>
     </>
   )
 };
