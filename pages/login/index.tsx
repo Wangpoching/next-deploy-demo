@@ -39,13 +39,14 @@ const LoginPage = () => {
       if (response.status !== 'connected') {
         return FB.login(function (response) {
            // 登入好了送 ACCESS_TOKEN 到後台
-          console.log('fb login success')
+          console.log(JSON.stringify(response))
         }, {
           scope: 'email',
           return_scopes: true
         })
       } else {
          // 如果登入了就要送 ACCESS_TOKEN 到後台
+         console.log(JSON.stringify(response))
       }
     }, true);
   }
