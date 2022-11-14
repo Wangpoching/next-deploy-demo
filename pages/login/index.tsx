@@ -115,7 +115,7 @@ const LoginPage = () => {
       {/* Google 登入點擊導轉到登入畫面 */}
       <GoogleLogin
         onSuccess={credentialResponse => {
-          console.log(credentialResponse);
+          console.log(JSON.stringify(credentialResponse.profileObj));
           router.push('/products')
         }}
         onError={() => {
