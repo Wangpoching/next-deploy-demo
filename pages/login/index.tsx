@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from 'next'
 import { useEffect, useState } from 'react'
 import queryString from 'query-string'
 import Link from 'next/link'
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
+import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
 
@@ -52,6 +52,11 @@ const LoginPage = () => {
       }
     }, true);
   }
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: codeResponse => console.log(codeResponse),
+    flow: 'auth-code',
+  });
 
   useEffect(() => {
     // 一開始就把 FB 初始化
@@ -113,16 +118,9 @@ const LoginPage = () => {
       {/* FB 登入點擊導轉到登入畫面 */}
       <button onClick={_fbLogin}>FB 登入</button>
       {/* Google 登入點擊導轉到登入畫面 */}
-      <GoogleLogin
-        flow="auth-code"
-        onSuccess={credentialResponse => {
-          console.log(JSON.stringify(credentialResponse));
-          router.push('/products')
-        }}
-        onError={() => {
-          console.log('Login Failed');
-        }}
-      />
+      <button onClick={() => googleLogin()}>
+        Sign in with Google 🚀{' '}
+      </button>;
     </GoogleOAuthProvider>
   )
 };
