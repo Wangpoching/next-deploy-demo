@@ -72,6 +72,7 @@ const LoginPage = () => {
   */}
   useEffect(() => {
     if (router.query?.code) {
+      console.log(router.query.code)
       const queryAccessToken: getAccessTokenInfo = {
         grant_type: 'authorization_code',
         code: router.query.code as string,
